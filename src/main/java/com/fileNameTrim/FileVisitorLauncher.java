@@ -3,7 +3,7 @@ package com.fileNameTrim;
 import java.io.File;
 import java.util.Scanner;
 
-public class FileTreeVisitor {
+public class FileVisitorLauncher {
 
 	Scanner scanner = new Scanner(System.in);
 
