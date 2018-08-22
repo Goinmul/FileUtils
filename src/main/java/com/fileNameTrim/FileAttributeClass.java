@@ -8,7 +8,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class FileAttributeClass {
 
-	void fileAttributeShower(String fileName)
+	public void fileAttributeShower(String fileName)
 	{
 		
 		BasicFileAttributes attrib = null;

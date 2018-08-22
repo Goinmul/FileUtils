@@ -7,7 +7,7 @@ public class FileTreeVisitor {
 
 	Scanner scanner = new Scanner(System.in);
 
-	void fileTraveler(File file)
+	public void fileTravelerLauncher(File file)
 	{
 		int options = 1; // default, numeric
 		
@@ -21,7 +21,6 @@ public class FileTreeVisitor {
 		case '1' :
 			// 1. changing only numbers
 		
-		
 		case '2' : 
 			// 2. change based on parent folder name
 		
@@ -31,8 +30,14 @@ public class FileTreeVisitor {
 			
 		}
 
-
 	}
+	
+	private void fileTraveler()
+	{
+		
+	}
+	
+	
 
 
 }
