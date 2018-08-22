@@ -15,7 +15,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class MyFileVisitor extends SimpleFileVisitor<Path>{
 
 	
-	
 	// 1) preVisitDirectory
 	// Any directory "SCCS" is skipped.
 	@Override
@@ -27,7 +26,7 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 		}
 		return CONTINUE;
 	}
-
+	
 
 	
 	// 2) visitFile
@@ -62,6 +61,7 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 		// consider : 02-1
 		// consider : 1.2
 		// consider : random_word_02
+		// consider : 19301402701307 - > no answer, so just ignore
 		
 		// logic : 
 		// 1) at the very beginning, parse the type of file. (ex) "01.txt" -> "01", ".txt"
@@ -72,7 +72,7 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 		// 1.2 -> 1.2
 		// random_word_02 -> __02
 		
-		// 3) now depending on what parser the line has, (count all types of parser, and choose the most found one)
+		// 3) now depending on what parser the line has, (count all types of parser, and choose the most found one. If same, weight one that comes later. 
 		// parse the remaining numbers to a temporary array.
 		
 		String unprocessed = original.getName(); // it would be like sample_file.txt
@@ -92,7 +92,6 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 			System.out.println("file : " + original + " is not modified.");
 		}
 		
-		
 		return CONTINUE;
 		
 	}
@@ -106,7 +105,7 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 	public FileVisitResult postVisitDirectory (Path dir, IOException exc)
 	{
 		// print each directory visited
-		System.out.format("directory : %s%n", dir);
+		System.out.format("(post visit) directory : %s%n", dir);
 		return CONTINUE;
 	}
 
