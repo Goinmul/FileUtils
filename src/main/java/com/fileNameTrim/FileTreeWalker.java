@@ -14,7 +14,6 @@ public class FileTreeWalker {
 	{
 		Files.walkFileTree(start, myVisitor); // parameter : starting directory, my custom visitor
 		
-		
 		// give return value
 		return null;
 		

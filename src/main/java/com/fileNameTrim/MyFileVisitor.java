@@ -78,15 +78,8 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 		String unprocessed = original.getName(); // it would be like sample_file.txt
 		String new_name = null;
 		
-		
-		
-		
-		
 		//Parsing and changing logic should be here.
 		new_name = unprocessed + "CHANGED";
-		
-		
-		
 		
 		File renamed = new File(new_name);
 
@@ -102,7 +95,6 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 			System.out.print("At " + file_path + " ");
 			System.out.println("file : " + original + " is not modified.");
 		}
-		
 		return CONTINUE;
 		
 	}
@@ -129,6 +121,20 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 		System.err.println(exc);
 		return CONTINUE;
 	}
+	/*
+	 // Circular Link handling example snippet
+	 @Override
+	public FileVisitResult
+    visitFileFailed(Path file,
+        IOException exc) {
+    		if (exc instanceof FileSystemLoopException) {
+        System.err.println("cycle detected: " + file);
+    } else {
+        System.err.format("Unable to copy:" + " %s: %s%n", file, exc);
+    }
+    return CONTINUE;
+}
+	 */
 
 
 

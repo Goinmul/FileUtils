@@ -1,21 +1,17 @@
 package com.fileNameTrim;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Scanner;
 
-// IMPLEMENT LATER
 public class FileVisitorLauncher {
-
 
 	public void fileTravelerLauncher() throws IOException
 	{
 		Scanner myScanner = new Scanner(System.in);
-		
+		FileTreeWalker myWalker = new FileTreeWalker();
 		/*
 		int options = 1; // default, numeric
 		
@@ -31,15 +27,30 @@ public class FileVisitorLauncher {
 		String header_directory = myScanner.nextLine();
 		Path path = Paths.get(header_directory);
 		
-		// instantiate basic file attributes
-		BasicFileAttributes attrib = Files.readAttributes(path, BasicFileAttributes.class);
 		
-		// actual methods
+		
+		//0) organized in my other class
 		MyFileVisitor traveler = new MyFileVisitor();
-		traveler.preVisitDirectory(path, attrib);
+		myWalker.walkFileTree(path, traveler);
+		
+		//1) simple one
+		//MyFileVisitor traveler = new MyFileVisitor();
+		//Files.walkFileTree(path, traveler);
+		
+		//2) options included : levels to visit, and
+		// set of 'FileVisitOption' enums
+		/*
+		import static java.nio.file.FileVisitResult.*;
 
-		IOException e = new IOException(); // ((!)) is this right syntax?
-		traveler.postVisitDirectory(path, e);
+		Path startingDir = ...;
+
+		EnumSet<FileVisitOption> opts = EnumSet.of(FOLLOW_LINKS);
+
+		Finder finder = new Finder(pattern);
+		Files.walkFileTree(startingDir, opts, Integer.MAX_VALUE, finder);
+		
+		*/
+		
 		
 		
 		
