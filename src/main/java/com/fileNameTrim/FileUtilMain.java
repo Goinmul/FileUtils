@@ -1,26 +1,20 @@
 package com.fileNameTrim;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
-
+import java.nio.file.attribute.BasicFileAttributes;
 // input : a header file name( ex - c:/myfile )
 // output : void
 // result : changed names, under all the files in the folders of the header file
 public class FileUtilMain {
 	
-	
-	public static void main (String args[])
+	public static void main (String args[]) throws IOException
 	{
-		Scanner myScanner = new Scanner(System.in);
-		String header_directory = myScanner.nextLine();
-		
-		Path path = Paths.get(header_directory);
-		
 		FileVisitorLauncher fileReader = new FileVisitorLauncher();
-		
-		// get file path from user
-		
+		fileReader.fileTravelerLauncher();
 	}
 
 }

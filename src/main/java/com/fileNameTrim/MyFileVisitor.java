@@ -82,11 +82,22 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 		
 		
 		
+		//Parsing and changing logic should be here.
+		new_name = unprocessed + "CHANGED";
+		
+		
+		
+		
 		File renamed = new File(new_name);
 
 		// actually moving/renaming code
 		boolean isMoved  = original.renameTo(renamed); // in Unix or Linux, you might need this code due to access authority.
-		if (isMoved == false)
+		if (isMoved == true)
+		{
+			System.out.print(unprocessed + " is renamed to : " + new_name);
+		}
+		
+		else if (isMoved == false)
 		{
 			System.out.print("At " + file_path + " ");
 			System.out.println("file : " + original + " is not modified.");
