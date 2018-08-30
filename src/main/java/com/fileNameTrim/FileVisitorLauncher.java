@@ -1,5 +1,6 @@
 package com.fileNameTrim;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,6 +26,13 @@ public class FileVisitorLauncher {
 		// get file path from user
 		System.out.print("Enter the header file to check : ");
 		String header_directory = myScanner.nextLine();
+		File directory_valid_check = new File(header_directory);
+		if(directory_valid_check.isDirectory() == false)
+		{
+			System.out.println(header_directory + " is not a valid directory.");
+			System.exit(1);
+		}
+		
 		Path path = Paths.get(header_directory);
 		
 		

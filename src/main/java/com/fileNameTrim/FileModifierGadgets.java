@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 
 public class FileModifierGadgets {
 
-	// bottom level worker. will be called a lot, changing every file name.
+	// bottom level worker. will be called a lot, affecting the program performance the most.
+	// *Path valid check already done in FileVisitorLauncher class
 	public void mover_renamer(Path path)
 	{
 
@@ -24,11 +25,12 @@ public class FileModifierGadgets {
 		Pattern file_name_pattern = Pattern.compile("(.+)(\\..+)");
 		Matcher myMatcher = file_name_pattern.matcher(file_name_string);
 		
+		// ((!)) set this String for your customized usage.
+		String added_part = "x0x0x0x0x";
 		
-		// ((!)) get this line from user, as an input parameter
-		String added_part = "000";
-		
-		if (myMatcher.find()) // when the path matches a normal file format
+		// gets into if statement, when the file name explicitly shows its type.
+		// example) data_file.txt
+		if (myMatcher.find()) 
 		{
 			String actual_file_name = null;
 			String file_type = null;
@@ -52,8 +54,28 @@ public class FileModifierGadgets {
 			{
 				System.out.println("file [" + file_1 + "] is not modified.");
 			}
-			// renaming file.
-			File original = path.toFile();
+			
+		}
+		
+		// gets into else if statement, when the file name implicitly contains its type.
+		// example) data_file (full name would be data_file.txt)
+		else
+		{
+			String new_name = file_name_string + added_part;
+			File file_1_moved = new File(new_name);
+			
+			// actually moving/renaming code
+			boolean isMoved  = file_1.renameTo(file_1_moved);
+			
+			if (isMoved == true)
+			{
+				System.out.println("file [" + file_1_moved +"] is created.");
+			}
+			if (isMoved == false)
+			{
+				System.out.println("file [" + file_1 + "] is not modified.");
+			}
+			
 		}
 		
 		
