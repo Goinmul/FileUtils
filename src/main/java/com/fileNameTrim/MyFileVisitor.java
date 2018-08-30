@@ -14,7 +14,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class MyFileVisitor extends SimpleFileVisitor<Path>{
 
-	
 	// 1) preVisitDirectory
 	// Any directory "SCCS" is skipped.
 	@Override
@@ -35,6 +34,9 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 	@Override
 	public FileVisitResult visitFile(Path file_path, BasicFileAttributes attrib)
 	{
+		// this instance contains all the "actual work" for files visited.
+		FileModifierGadgets myTool = new FileModifierGadgets();
+		
 		// if the program reaches at a specific file, terminates program
 		Path sensitive_directory = Paths.get("c:/programfiles");
 		if (file_path.getFileName().equals(sensitive_directory))
@@ -43,58 +45,9 @@ public class MyFileVisitor extends SimpleFileVisitor<Path>{
 			return TERMINATE;
 		}
 		
-		// print information about each type of file.
-		System.out.println("file name : " + file_path.getFileName());
-		System.out.format("type : " + file_path);
-		System.out.println("size : " + attrib.size());
-		System.out.println("creation time : " + attrib.creationTime());
-		System.out.println("last access time : " + attrib.lastAccessTime());
-		System.out.println("last modified time : " + attrib.lastModifiedTime());
+		myTool.mover_renamer(file_path);
 
-		// renaming file.
-		File original = file_path.toFile();
-
-		// ((!)) would the file name be shown like "01.txt" or just "01"? MUST EXPERIMENT show it is shown like.
-		// I think previous one is shown.
 		
-		// logic for changing 1, 01, 001 to 0001.
-		// consider : 02-1
-		// consider : 1.2
-		// consider : random_word_02
-		// consider : 19301402701307 - > no answer, so just ignore
-		
-		// logic : 
-		// 1) at the very beginning, parse the type of file. (ex) "01.txt" -> "01", ".txt"
-		// 2) delete everything except the considered parsing chars.
-		// then the remaining string should be like this :
-		
-		// 02-1 -> 02-1
-		// 1.2 -> 1.2
-		// random_word_02 -> __02
-		
-		// 3) now depending on what parser the line has, (count all types of parser, and choose the most found one. If same, weight one that comes later. 
-		// parse the remaining numbers to a temporary array.
-		
-		String unprocessed = original.getName(); // it would be like sample_file.txt
-		String new_name = null;
-		
-		//Parsing and changing logic should be here.
-		new_name = unprocessed + "CHANGED";
-		
-		File renamed = new File(new_name);
-
-		// actually moving/renaming code
-		boolean isMoved  = original.renameTo(renamed); // in Unix or Linux, you might need this code due to access authority.
-		if (isMoved == true)
-		{
-			System.out.print(unprocessed + " is renamed to : " + new_name);
-		}
-		
-		else if (isMoved == false)
-		{
-			System.out.print("At " + file_path + " ");
-			System.out.println("file : " + original + " is not modified.");
-		}
 		return CONTINUE;
 		
 	}

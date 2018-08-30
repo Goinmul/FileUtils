@@ -8,7 +8,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class FileAttributeClass {
 
-	public void fileAttributeShower(String fileName)
+	public void fileAttributePrinter(String fileName)
 	{
 		
 		BasicFileAttributes attrib = null;
@@ -17,6 +17,7 @@ public class FileAttributeClass {
 		try {
 			attrib = Files.readAttributes(file_path, BasicFileAttributes.class);
 
+			// print some file attributes
 			System.out.println("file name : " + file_path.getFileName());
 			System.out.println("size : " + attrib.size());
 			System.out.println("last access time : " + attrib.lastAccessTime());

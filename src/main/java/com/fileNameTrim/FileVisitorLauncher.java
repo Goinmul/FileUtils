@@ -28,7 +28,6 @@ public class FileVisitorLauncher {
 		Path path = Paths.get(header_directory);
 		
 		
-		
 		//0) organized in my other class
 		MyFileVisitor traveler = new MyFileVisitor();
 		myWalker.walkFileTree(path, traveler);
